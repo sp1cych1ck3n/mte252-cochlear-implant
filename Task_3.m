@@ -60,9 +60,4 @@ for i = 1:n
     TitleStr = '1 kHz Cosine for Two Cycles';
     title(TitleStr); 
     grid on;
-<<<<<<< HEAD
 end
-=======
-end
-// test diya
->>>>>>> 0357492a05d0ca739a28673aef9a84e89b09789c
