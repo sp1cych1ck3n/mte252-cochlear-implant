@@ -3,7 +3,8 @@ clc;
 
 scriptDir = fileparts(mfilename('fullpath'));
 % SR = sampling rate
-[mono, SR] = load_audio(fullfile(scriptDir, 'MTE252_Task2', 'elderly.mp3'));
+
+[mono, SR] = load_audio('/Users/diya/Documents/MATLAB/cochlear/audio files/baby_crying.mp3');
 
 % Task 4: make N a parameter
 fs = SR;
@@ -11,7 +12,7 @@ N = 10;
 
 % Task 4: build the edges (logarithmic spacing), define the channel bandwidths
 % top edge is kept just under fs/2 = 8000 Hz because butter needs edges below the Nyquist frequency
-edges = logspace(log10(100), log10(7990), N + 1);
+edges = logspace(log10(100), log10(7900), N + 1);
 
 % Task 5: filter each signal through every channel
 filteredSignal = zeros(length(mono), N);
@@ -21,17 +22,22 @@ for i = 1:N
     filteredSignal(:, i) = filter(b, a, mono);
 end
 
-% Task 6: plot lowest and highest channels
+% Task 6: Plot lowest and highest frequency channels separately
 figure;
+
+% Lowest Frequency Channel
+subplot(2, 1, 1);
 plot(filteredSignal(:, 1));
-title('Phase 2: Task 6, Lowest and Highest Frequency Channels');
+title('Phase 2: Task 6, Lowest Frequency Channel');
 xlabel('Sample Number');
 ylabel('Amplitude');
-hold on
 
+% Highest Frequency Channel
+subplot(2, 1, 2);
 plot(filteredSignal(:, N));
-legend('Lowest', 'Highest');
-hold off
+title('Phase 2: Task 6, Highest Frequency Channel');
+xlabel('Sample Number');
+ylabel('Amplitude');
 
 % Task 7: rectify
 rectifiedSignal = abs(filteredSignal);
@@ -40,14 +46,30 @@ rectifiedSignal = abs(filteredSignal);
 [envelopeB, envelopeA] = butter(2, 400 / (fs / 2), 'low');
 envelopeSignal = filter(envelopeB, envelopeA, rectifiedSignal);
 
-% Task 9: Plot the extracted envelope of the lowest and highest frequency channels.
+
+% Task 9: Plot extracted envelopes separately
 figure;
+
+% Lowest Frequency Channel
+subplot(2, 1, 1);
 plot(envelopeSignal(:, 1));
-title('Phase 2: Task 9, Extracted Envelope');
+title('Phase 2: Task 9, Lowest Frequency Channel');
 xlabel('Sample Number');
 ylabel('Amplitude');
-hold on
 
+% Highest Frequency Channel
+subplot(2, 1, 2);
 plot(envelopeSignal(:, N));
-legend('Lowest Frequency Channel', 'Highest Frequency Channel')
-hold off
+title('Phase 2: Task 9, Highest Frequency Channel');
+xlabel('Sample Number');
+ylabel('Amplitude');
+
+
+function [mono, SR] = load_audio(filePath)
+[audioData, SR] = audioread(filePath);
+mono = sum(audioData, 2);
+if SR > 16000
+    mono = resample(mono, 16000, SR);
+    SR = 16000;
+end
+end
