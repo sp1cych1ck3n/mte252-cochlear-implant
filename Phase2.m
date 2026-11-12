@@ -1,4 +1,5 @@
 scriptDir = fileparts(mfilename('fullpath'));
+% SR = sampling rate
 [mono, SR] = load_audio(fullfile(scriptDir, 'MTE252_Task2', 'elderly.mp3'));
 
 % Task 4: make N a parameter
