@@ -1,3 +1,7 @@
+clear all;
+clear clc;
+close all;
+
 % Create a program to read these files (or some of these files) into Matlab and find their sampling rate.
 scriptDir = fileparts(mfilename('fullpath'));
 inputFiles = dir(fullfile(scriptDir, 'MTE252_Task2', '*.mp3'));
