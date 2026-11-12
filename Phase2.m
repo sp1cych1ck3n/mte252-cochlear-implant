@@ -1,6 +1,5 @@
-clear all;
-clear clc;
-close all;
+clear; 
+clc;
 
 scriptDir = fileparts(mfilename('fullpath'));
 % SR = sampling rate
