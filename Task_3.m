@@ -1,3 +1,7 @@
+clear all;
+clear clc;
+close all;
+
 % Create a program to read these files (or some of these files) into Matlab and find their sampling rate.
 scriptDir = fileparts(mfilename('fullpath'));
 inputFiles = dir(fullfile(scriptDir, 'MTE252_Task2', '*.mp3'));
@@ -56,4 +60,9 @@ for i = 1:n
     TitleStr = '1 kHz Cosine for Two Cycles';
     title(TitleStr); 
     grid on;
+<<<<<<< HEAD
 end
+=======
+end
+// test diya
+>>>>>>> 0357492a05d0ca739a28673aef9a84e89b09789c

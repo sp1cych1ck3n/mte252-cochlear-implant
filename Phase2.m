@@ -1,4 +1,8 @@
+clear; 
+clc;
+
 scriptDir = fileparts(mfilename('fullpath'));
+% SR = sampling rate
 [mono, SR] = load_audio(fullfile(scriptDir, 'MTE252_Task2', 'elderly.mp3'));
 
 % Task 4: make N a parameter
@@ -7,7 +11,7 @@ N = 10;
 
 % Task 4: build the edges (logarithmic spacing), define the channel bandwidths
 % top edge is kept just under fs/2 = 8000 Hz because butter needs edges below the Nyquist frequency
-edges = logspace(log10(100), log10(8000), N + 1);
+edges = logspace(log10(100), log10(7990), N + 1);
 
 % Task 5: filter each signal through every channel
 filteredSignal = zeros(length(mono), N);
