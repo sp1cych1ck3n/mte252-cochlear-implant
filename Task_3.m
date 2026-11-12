@@ -1,5 +1,6 @@
 % Create a program to read these files (or some of these files) into Matlab and find their sampling rate.
-inputFiles = dir(fullfile('/Users/kianah/Downloads/MTE252_Task2', '*.mp3'));
+scriptDir = fileparts(mfilename('fullpath'));
+inputFiles = dir(fullfile(scriptDir, 'MTE252_Task2', '*.mp3'));
 n = length(inputFiles);
 mkdir('Output_Files');
 for i = 1:n
